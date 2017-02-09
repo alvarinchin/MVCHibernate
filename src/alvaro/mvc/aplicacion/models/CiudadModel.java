@@ -1,9 +1,12 @@
 package alvaro.mvc.aplicacion.models;
 
+
+
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.annotation.WebServlet;
+
 
 import org.hibernate.Transaction;
 
@@ -23,11 +26,16 @@ public class CiudadModel extends org.mvc.Model {
 	
 	public List <Ciudad> listar(){
 		
-		Transaction t=ses.beginTransaction();
-		List <Ciudad> lista= ses.createQuery("from ciudad").list();
-		ses.close();
-		return lista;
+	 List <Ciudad> ciudades=ses.createQuery("from Ciudad").list();
+		 ses.close();
+			return ciudades ;
 		
+	}
+	public boolean existe(String nombre){
+		
+		ses.createQuery("from ciudad where nombre = :nombre");
+		
+		return false;
 	}
 
 }

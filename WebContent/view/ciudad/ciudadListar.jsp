@@ -1,12 +1,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <div class="container">
-	<table class="table-striped">
+	<table class="table table-striped">
+	<thead>
 	<tr>
-	<td>Nombre</td>
+	<th>Nombre</th>
 	
 	
 	</tr>
-	
+	</thead>
 		<c:forEach var="ciudad" items="${ciudades}">
 		<tr>
 		<td>${ciudad.nombre}</td>
