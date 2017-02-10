@@ -25,23 +25,39 @@ public class CiudadController extends org.mvc.Controller {
 
 	public void crearPost() throws IOException {
 		String nombre = request.getParameter("nombre");
-		new CiudadModel().crearCiudad(nombre);
-
-		response.sendRedirect(baseURL + "ciudad/listar");
-
+		boolean res = new CiudadModel().crearCiudad(nombre);
+		if (res) {
+			response.sendRedirect(baseURL + "ciudad/listar");
+		} else {
+			view("error/error.jsp");
+		}
 	}
 
 	public void listarGet() {
-		List<Ciudad> lc = new CiudadModel().listar();
-		datos.put("ciudades", lc);
-		view("ciudad/ciudadListar.jsp");
+		if (request.getParameter("filtro") == null) {
+			List<Ciudad> lc = new CiudadModel().listar();
+			datos.put("ciudades", lc);
+			view("ciudad/ciudadListar.jsp");
+		} else {
+			List<Ciudad> lc = new CiudadModel().listarFiltro(request.getParameter("filtro"));
+			datos.put("ciudades", lc);
+			view("ciudad/ciudadListar.jsp");
+		}
 
 	}
 
 	public void listarPost() {
-		List<Ciudad> lc = new CiudadModel().listar();
-		datos.put("ciudades", lc);
-		view("ciudad/ciudadListar.jsp");
+		if (request.getParameter("filtro") == null) {
+			List<Ciudad> lc = new CiudadModel().listar();
+			datos.put("ciudades", lc);
+			view("ciudad/ciudadListar.jsp");
+		} else {
+			List<Ciudad> lc = new CiudadModel().listarFiltro(request.getParameter("filtro"));
+			datos.put("ciudades", lc);
+			view("ciudad/ciudadListar.jsp");
+
+		}
 
 	}
+
 }

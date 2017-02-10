@@ -1,23 +1,20 @@
 package alvaro.mvc.aplicacion.models;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.annotation.WebServlet;
-
-import org.hibernate.Query;
 import org.hibernate.Transaction;
 
-import alvaro.mvc.pojos.Ciudad;
+import alvaro.mvc.pojos.LenguajeProgramacion;;
 
-public class CiudadModel extends org.mvc.Model {
+public class LenguajeModel extends org.mvc.Model{
 
-	public boolean crearCiudad(String nombre) {
+
+	public boolean crearLenguaje(String nombre) {
 		
 		if (existe(nombre)){
 
 		Transaction t = ses.beginTransaction();
-		Ciudad c = new Ciudad(nombre);
+		LenguajeProgramacion l = new LenguajeProgramacion(nombre);
 		ses.save(c);
 		t.commit();
 		ses.close();
@@ -53,5 +50,6 @@ public class CiudadModel extends org.mvc.Model {
 			return false;
 		}
 	}
+
 
 }
