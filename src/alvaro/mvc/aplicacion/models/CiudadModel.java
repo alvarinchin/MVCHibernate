@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.servlet.annotation.WebServlet;
 
+import net.sf.json.util.JSONBuilder;
+
 import org.hibernate.Query;
 import org.hibernate.Transaction;
 
@@ -14,17 +16,18 @@ public class CiudadModel extends org.mvc.Model {
 
 	public boolean crearCiudad(String nombre) {
 		
-		if (existe(nombre)){
+		//if (existe(nombre)){
 
 		Transaction t = ses.beginTransaction();
 		Ciudad c = new Ciudad(nombre);
+		
 		ses.save(c);
 		t.commit();
 		ses.close();
 		return true;
-		}else{
-			return false;
-		}
+		//}else{
+			//return false;
+		//}
 	}
 
 	public List<Ciudad> listar() {

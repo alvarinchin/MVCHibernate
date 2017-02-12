@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.hibernate.Transaction;
 
-import alvaro.mvc.pojos.LenguajeProgramacion;;
+import alvaro.mvc.pojos.LenguajeProgramacion;
 
 public class LenguajeModel extends org.mvc.Model{
 
@@ -15,7 +15,7 @@ public class LenguajeModel extends org.mvc.Model{
 
 		Transaction t = ses.beginTransaction();
 		LenguajeProgramacion l = new LenguajeProgramacion(nombre);
-		ses.save(c);
+		ses.save(l);
 		t.commit();
 		ses.close();
 		return true;
@@ -24,18 +24,18 @@ public class LenguajeModel extends org.mvc.Model{
 		}
 	}
 
-	public List<Ciudad> listar() {
+	public List<LenguajeProgramacion> listar() {
 
-		List<Ciudad> ciudades = ses.createQuery("from Ciudad").list();
+		List<LenguajeProgramacion> ciudades = ses.createQuery("from LenguajeProgramacion").list();
 		ses.close();
 		return ciudades;
 
 	}
-	public List<Ciudad> listarFiltro(String filtro) {
+	public List<LenguajeProgramacion> listarFiltro(String filtro) {
 		
 		filtro="%"+filtro+"%";
 		
-		List<Ciudad> ciudades = ses.createQuery("from Ciudad where nombre like :filto ").setParameter("filtro",filtro).list();
+		List<LenguajeProgramacion> ciudades = ses.createQuery("from LenguajeProgramacion where nombre like :filto ").setParameter("filtro",filtro).list();
 		ses.close();
 		return ciudades;
 
@@ -43,7 +43,7 @@ public class LenguajeModel extends org.mvc.Model{
 
 	public boolean existe(String nombre) {
 
-		List <Ciudad> l= ses.createQuery("from Ciudad where nombre = :nombre").setParameter("nombre", nombre).list();
+		List <LenguajeProgramacion> l= ses.createQuery("from LenguajeProgramacion where nombre = :nombre").setParameter("nombre", nombre).list();
 		if(l.size()>0){
 			return true;
 		} else {
