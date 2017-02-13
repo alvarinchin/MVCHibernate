@@ -1,16 +1,12 @@
 package alvaro.mvc.aplicacion.controllers;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 
-import net.sf.json.processors.JsonBeanProcessorMatcher;
 import alvaro.mvc.aplicacion.models.CiudadModel;
 import alvaro.mvc.pojos.Ciudad;
-import jdk.nashorn.internal.runtime.arrays.ArrayLikeIterator;
 
 
 
@@ -28,18 +24,11 @@ public class CiudadController extends org.mvc.Controller {
 
 	public void crearPost() throws IOException {
 		String nombre = request.getParameter("nombre");
-		boolean res;
 		try {
 			new CiudadModel().crearCiudad(nombre);
-			res = true;
-		} catch (Exception e) {
-
-			res = false;
-		}
-
-		if (res) {
 			response.sendRedirect(baseURL + "ciudad/listar");
-		} else {
+		}
+		catch (Exception e){
 			view("error/error.jsp");
 		}
 	}

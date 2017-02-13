@@ -1,4 +1,4 @@
-package alvaro.mvc.pojos;
+		package alvaro.mvc.pojos;
 
 import javax.persistence.*;
 
@@ -15,6 +15,8 @@ public class LenguajeProgramacion {
 	}
 	@Column(unique=true)
 	private String nombre;
+	@GeneratedValue
+	@Id
 	private long id;
 
 	public String getNombre() {
@@ -25,8 +27,7 @@ public class LenguajeProgramacion {
 		this.nombre = nombre;
 	}
 
-	@GeneratedValue
-	@Id
+
 	public long getId() {
 		return id;
 	}

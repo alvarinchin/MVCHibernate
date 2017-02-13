@@ -9,35 +9,31 @@ import alvaro.mvc.pojos.LenguajeProgramacion;
 public class LenguajeModel extends org.mvc.Model{
 
 
-	public boolean crearLenguaje(String nombre) {
-		
-		if (existe(nombre)){
+	public void crearLenguaje(String nombre) {
+	
 
 		Transaction t = ses.beginTransaction();
 		LenguajeProgramacion l = new LenguajeProgramacion(nombre);
 		ses.save(l);
 		t.commit();
 		ses.close();
-		return true;
-		}else{
-			return false;
-		}
+	
 	}
 
 	public List<LenguajeProgramacion> listar() {
 
-		List<LenguajeProgramacion> ciudades = ses.createQuery("from LenguajeProgramacion").list();
+		List<LenguajeProgramacion> lenguajes = ses.createQuery("from LenguajeProgramacion").list();
 		ses.close();
-		return ciudades;
+		return lenguajes;
 
 	}
 	public List<LenguajeProgramacion> listarFiltro(String filtro) {
 		
 		filtro="%"+filtro+"%";
 		
-		List<LenguajeProgramacion> ciudades = ses.createQuery("from LenguajeProgramacion where nombre like :filto ").setParameter("filtro",filtro).list();
+		List<LenguajeProgramacion> lenguajes = ses.createQuery("from LenguajeProgramacion where nombre like :filto ").setParameter("filtro",filtro).list();
 		ses.close();
-		return ciudades;
+		return lenguajes;
 
 	}
 

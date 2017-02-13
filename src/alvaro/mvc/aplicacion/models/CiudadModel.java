@@ -14,20 +14,18 @@ import alvaro.mvc.pojos.Ciudad;
 
 public class CiudadModel extends org.mvc.Model {
 
-	public boolean crearCiudad(String nombre) {
-		
-		//if (existe(nombre)){
+	public void crearCiudad(String nombre)throws Exception {
 
-		Transaction t = ses.beginTransaction();
-		Ciudad c = new Ciudad(nombre);
+
+			Transaction t = ses.beginTransaction();
+			Ciudad c = new Ciudad(nombre);
+
+			ses.save(c);
+			t.commit();
+			ses.close();
+
 		
-		ses.save(c);
-		t.commit();
-		ses.close();
-		return true;
-		//}else{
-			//return false;
-		//}
+
 	}
 
 	public List<Ciudad> listar() {
@@ -37,11 +35,13 @@ public class CiudadModel extends org.mvc.Model {
 		return ciudades;
 
 	}
+
 	public List<Ciudad> listarFiltro(String filtro) {
-		
-		filtro="%"+filtro+"%";
-		
-		List<Ciudad> ciudades = ses.createQuery("from Ciudad where nombre like :filto ").setParameter("filtro",filtro).list();
+
+		filtro = "%" + filtro + "%";
+
+		List<Ciudad> ciudades = ses.createQuery("from Ciudad where nombre like :filto ").setParameter("filtro", filtro)
+				.list();
 		ses.close();
 		return ciudades;
 
@@ -49,8 +49,8 @@ public class CiudadModel extends org.mvc.Model {
 
 	public boolean existe(String nombre) {
 
-		List <Ciudad> l= ses.createQuery("from Ciudad where nombre = :nombre").setParameter("nombre", nombre).list();
-		if(l.size()>0){
+		List<Ciudad> l = ses.createQuery("from Ciudad where nombre = :nombre").setParameter("nombre", nombre).list();
+		if (l.size() > 0) {
 			return true;
 		} else {
 			return false;

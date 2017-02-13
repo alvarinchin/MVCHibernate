@@ -1,11 +1,16 @@
 package alvaro.mvc.pojos;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Entity
 public class Ciudad {
 
-	private long id;
+	@Id
+	@GeneratedValue
+	private Long id;
 
 	@Column(unique = true)
 	private String nombre;
@@ -19,13 +24,11 @@ public class Ciudad {
 		this.nombre = nombre;
 	}
 
-	@Id
-	@GeneratedValue
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
