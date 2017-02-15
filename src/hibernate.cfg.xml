@@ -15,9 +15,9 @@
 		<property name="hbm2ddl.auto">update</property>
 		<property name="hibernate.enable_lazy_load_no_trans">true</property>
  		
-  		<mapping class="alvaro.mvc.pojos.Ciudad"/>
-  		<mapping class="alvaro.mvc.pojos.Empleado"/>
-  		<mapping class="alvaro.mvc.pojos.LenguajeProgramacion"/>
+  		<mapping class="alvaro.mvc.aplicacion.pojos.Ciudad"/>
+  		<mapping class="alvaro.mvc.aplicacion.pojos.Empleado"/>
+  		<mapping class="alvaro.mvc.aplicacion.pojos.LenguajeProgramacion"/>
   		
     </session-factory>
 </hibernate-configuration>

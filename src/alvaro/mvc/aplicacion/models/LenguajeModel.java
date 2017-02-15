@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.hibernate.Transaction;
 
-import alvaro.mvc.pojos.LenguajeProgramacion;
+import alvaro.mvc.aplicacion.pojos.LenguajeProgramacion;
 
 public class LenguajeModel extends org.mvc.Model{
 

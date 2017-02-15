@@ -1,4 +1,6 @@
-		package alvaro.mvc.pojos;
+		package alvaro.mvc.aplicacion.pojos;
+
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -18,6 +20,12 @@ public class LenguajeProgramacion {
 	@GeneratedValue
 	@Id
 	private long id;
+	
+	private Set<Empleado> emplados;
+	
+	public void addToEmpleados(Empleado e){
+		
+	}
 
 	public String getNombre() {
 		return nombre;

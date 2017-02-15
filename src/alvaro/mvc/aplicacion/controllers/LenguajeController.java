@@ -7,10 +7,8 @@ import javax.servlet.annotation.WebServlet;
 
 import org.mvc.Controller;
 
-
 import alvaro.mvc.aplicacion.models.LenguajeModel;
-
-import alvaro.mvc.pojos.LenguajeProgramacion;
+import alvaro.mvc.aplicacion.pojos.LenguajeProgramacion;
 
 @WebServlet({ "/lenguaje", "/lenguaje/*" })
 public class LenguajeController extends Controller{

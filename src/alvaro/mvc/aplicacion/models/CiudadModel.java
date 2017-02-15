@@ -1,16 +1,10 @@
 package alvaro.mvc.aplicacion.models;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.annotation.WebServlet;
-
-import net.sf.json.util.JSONBuilder;
-
-import org.hibernate.Query;
 import org.hibernate.Transaction;
 
-import alvaro.mvc.pojos.Ciudad;
+import alvaro.mvc.aplicacion.pojos.Ciudad;
 
 public class CiudadModel extends org.mvc.Model {
 
