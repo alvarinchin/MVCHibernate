@@ -1,5 +1,7 @@
 package alvaro.mvc.aplicacion.pojos;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,15 +20,16 @@ public class Ciudad {
 
 	private String nombre;
 
-	private Set<Empleado> empleados;
+	private Collection<Empleado> empleados;
 
 	public Ciudad() {
-
+		this.empleados=new ArrayList<Empleado>();
 	}
 
 	public Ciudad(String nombre) {
 		super();
 		this.nombre = nombre;
+		this.empleados=new ArrayList<Empleado>();
 
 	}
 
@@ -40,11 +43,11 @@ public class Ciudad {
 	}
 
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "ciudad")
-	public Set<Empleado> getEmpleados() {
-		return empleados;
+	public Collection<Empleado> getEmpleados() {
+		return  empleados;
 	}
 
-	public void setEmpleados(Set<Empleado> empleados) {
+	public void setEmpleados(Collection<Empleado> empleados) {
 		this.empleados = empleados;
 	}
 

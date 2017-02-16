@@ -40,6 +40,7 @@ public class LenguajeModel extends org.mvc.Model{
 	public boolean existe(String nombre) {
 
 		List <LenguajeProgramacion> l= ses.createQuery("from LenguajeProgramacion where nombre = :nombre").setParameter("nombre", nombre).list();
+		ses.clear();
 		if(l.size()>0){
 			return true;
 		} else {

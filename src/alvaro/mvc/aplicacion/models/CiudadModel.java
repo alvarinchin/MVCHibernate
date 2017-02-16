@@ -40,6 +40,10 @@ public class CiudadModel extends org.mvc.Model {
 		return ciudades;
 
 	}
+	
+	public Ciudad recuperarPorId(Long id){
+		return ses.get(Ciudad.class, id);
+	}
 
 	public boolean existe(String nombre) {
 
