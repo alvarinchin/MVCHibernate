@@ -33,8 +33,10 @@ public class EmpleadoController extends Controller {
 	public void crearPost() throws IOException {
 		String nombre = request.getParameter("nombre");
 		Ciudad c = new CiudadModel().recuperarPorId(Long.parseLong(request.getParameter("ciudad")));
+		String [] ids= request.getParameterValues("lenguajes[]");
+		List<LenguajeProgramacion> lenguajes= new LenguajeModel().listaLenguajes(ids);
 		try {
-			new EmpleadoModel().crearEmpleado(nombre, c);
+			new EmpleadoModel().crearEmpleado(nombre, c,lenguajes);
 
 			view("empleado/empleadoCrear.jsp");
 		} catch (Exception e) {

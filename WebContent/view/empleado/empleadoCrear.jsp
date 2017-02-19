@@ -19,7 +19,7 @@
 			<div class="form-group">
 				<c:forEach var="lenguaje" items="${lenguajes}">
 					<div class="checkbox-inline">
-						<input type="checkbox" value="${lenguaje.id}">${lenguaje.nombre}
+						<input name="lenguajes[]" type="checkbox" value="${lenguaje.id}">${lenguaje.nombre}
 				</c:forEach>
 			</div>
 		

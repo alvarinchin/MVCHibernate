@@ -1,5 +1,6 @@
 package alvaro.mvc.aplicacion.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Transaction;
@@ -46,6 +47,16 @@ public class LenguajeModel extends org.mvc.Model{
 		} else {
 			return false;
 		}
+	}
+
+	public List<LenguajeProgramacion> listaLenguajes(String[] ids) {
+		List <LenguajeProgramacion> lenguajes=new ArrayList<LenguajeProgramacion>();
+		for (int i = 0; i < ids.length; i++) {
+			LenguajeProgramacion l= (LenguajeProgramacion) ses.load("lenguajeProgramacion", Long.parseLong(ids[i]));
+			lenguajes.add(l);
+		}
+		
+		return lenguajes;
 	}
 
 
