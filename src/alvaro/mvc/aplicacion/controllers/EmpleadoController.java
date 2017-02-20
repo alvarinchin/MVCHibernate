@@ -11,6 +11,7 @@ import alvaro.mvc.aplicacion.models.CiudadModel;
 import alvaro.mvc.aplicacion.models.EmpleadoModel;
 import alvaro.mvc.aplicacion.models.LenguajeModel;
 import alvaro.mvc.aplicacion.pojos.Ciudad;
+import alvaro.mvc.aplicacion.pojos.Empleado;
 import alvaro.mvc.aplicacion.pojos.LenguajeProgramacion;
 
 @SuppressWarnings("serial")
@@ -38,7 +39,7 @@ public class EmpleadoController extends Controller {
 		try {
 			new EmpleadoModel().crearEmpleado(nombre, c,lenguajes);
 
-			view("empleado/empleadoCrear.jsp");
+			view("empleado/empleadoListar.jsp");
 		} catch (Exception e) {
 			view("error/error.jsp");
 		}
@@ -46,20 +47,20 @@ public class EmpleadoController extends Controller {
 
 	public void listarGet() {
 		if (request.getParameter("filtro") == null) {
-			List<Ciudad> lc = new CiudadModel().listar();
+			List<Empleado> empleados = new EmpleadoModel().listar();
 
-			datos.put("ciudades", lc);
-			view("ciudad/ciudadListar.jsp");
+			datos.put("empleados", empleados);
+			view("empleado/empleadoListar.jsp");
 		} else {
-			List<Ciudad> lc = new CiudadModel().listarFiltro(request.getParameter("filtro"));
-			datos.put("ciudades", lc);
-			view("ciudad/ciudadListar.jsp");
+			List<Empleado> empleados = new EmpleadoModel().listarFiltro(request.getParameter("filtro"));
+			datos.put("empleados", empleados);
+			view("empleado/empleadoListar.jsp");
 		}
 
 	}
 
 	public void listarPost() {
-		listarPost();
+		listarGet();
 	}
 
 }

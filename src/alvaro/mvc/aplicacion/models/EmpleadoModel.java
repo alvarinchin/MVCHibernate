@@ -3,6 +3,7 @@ package alvaro.mvc.aplicacion.models;
 
 
 import java.util.Collection;
+import java.util.List;
 
 import org.hibernate.Transaction;
 import org.mvc.Model;
@@ -22,6 +23,25 @@ public class EmpleadoModel extends Model{
 		t.commit();
 		ses.close();
 		
+	}
+	
+	public List<Empleado> listar() {
+
+		List<Empleado> empleados = ses.createQuery("from Empleado").list();
+		ses.close();
+		return empleados;
+
+	}
+
+	public List<Empleado> listarFiltro(String filtro) {
+
+		filtro = "%" + filtro + "%";
+
+		List<Empleado> empleados = ses.createQuery("from Empleado where nombre like :filto ").setParameter("filtro", filtro)
+				.list();
+		ses.close();
+		return empleados;
+
 	}
 
 }
