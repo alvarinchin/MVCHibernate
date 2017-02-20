@@ -55,4 +55,13 @@ public class CiudadModel extends org.mvc.Model {
 		}
 	}
 
+	public void modificar(String nombre,Long id) {
+	Transaction t = ses.beginTransaction();
+	Ciudad c = ses.get(Ciudad.class, id);
+	c.setNombre(nombre);
+	ses.merge(c);
+	t.commit();ses.close();
+		
+	}
+
 }

@@ -39,7 +39,7 @@ public class EmpleadoController extends Controller {
 		try {
 			new EmpleadoModel().crearEmpleado(nombre, c,lenguajes);
 
-			view("empleado/empleadoListar.jsp");
+			response.sendRedirect(baseURL+"empleado/listar");
 		} catch (Exception e) {
 			view("error/error.jsp");
 		}

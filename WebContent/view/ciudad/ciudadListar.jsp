@@ -12,7 +12,7 @@
 		<c:forEach var="ciudad" items="${ciudades}">
 		<form action="${baseURL}ciudad/modificar">
 		<tr>
-		<td>${ciudad.nombre}</td><td><input type="hidden" value="${ciudad.id}"><button type="submit">Modificar</button></td>
+		<td>${ciudad.nombre}</td><td><input type="hidden" name="id" value="${ciudad.id}"><button class="btn btn-primary" type="submit">Modificar</button></td>
 		</tr>
 		</form>
 		</c:forEach>

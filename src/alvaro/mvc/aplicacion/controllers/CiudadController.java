@@ -62,5 +62,35 @@ public class CiudadController extends org.mvc.Controller {
 		}
 
 	}
+	
+	public void modificarGet(){
+		if (request.getParameter("id")==null){
+			try {
+				response.sendRedirect(baseURL+"ciudad/listar");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				view("error/error.jsp");
+			}
+		}else{
+			
+			String id= (String) request.getAttribute("id");
+			Ciudad ciudad= new CiudadModel().recuperarPorId(Long.parseLong(id));
+			datos.put("ciudad", ciudad);
+			view("ciudad/ciudadModificar.jsp");
+			
+		}
+	}
+	
+	public void modificarPost(){
+		String nombre= request.getParameter("nombre");
+		Long id= Long.parseLong(request.getParameter("id"));
+		try{
+		new CiudadModel().modificar(nombre,id);
+		view("ciudad/listar");
+		}catch(Exception e){
+			view("error/error.jsp");
+		}
+		}
 
 }
