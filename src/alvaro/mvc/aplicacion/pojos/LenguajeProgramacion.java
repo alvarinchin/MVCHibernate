@@ -1,11 +1,18 @@
 package alvaro.mvc.aplicacion.pojos;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.*;
 
 @Entity
 public class LenguajeProgramacion {
+
+	private String nombre;
+
+	private long id;
+
+	private Collection<Empleado> empleados;
 
 	public LenguajeProgramacion() {
 
@@ -14,26 +21,25 @@ public class LenguajeProgramacion {
 	public LenguajeProgramacion(String nombre) {
 
 		this.nombre = nombre;
+		this.empleados = new ArrayList<Empleado>();
 	}
 
-	@Column(unique = true)
-	private String nombre;
+	public LenguajeProgramacion(String nombre, Collection<Empleado> lenguajes) {
 
-	@GeneratedValue
-	@Id
-	private long id;
-
-	private Collection<Empleado> empleados;
+		this.nombre = nombre;
+		this.empleados = lenguajes;
+	}
 
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "lenguajes")
-	public Collection<Empleado> getLenguajes() {
+	public Collection<Empleado> getEmpleados() {
 		return empleados;
 	}
 
-	public void setLenguajes(Collection<Empleado> empleados) {
+	public void setEmpleados(Collection<Empleado> empleados) {
 		this.empleados = empleados;
 	}
 
+	@Column(unique = true)
 	public String getNombre() {
 		return nombre;
 	}
@@ -42,6 +48,8 @@ public class LenguajeProgramacion {
 		this.nombre = nombre;
 	}
 
+	@GeneratedValue
+	@Id
 	public long getId() {
 		return id;
 	}

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.Transaction;
 
+import alvaro.mvc.aplicacion.pojos.Ciudad;
 import alvaro.mvc.aplicacion.pojos.LenguajeProgramacion;
 
 public class LenguajeModel extends org.mvc.Model{
@@ -52,7 +53,7 @@ public class LenguajeModel extends org.mvc.Model{
 	public List<LenguajeProgramacion> listaLenguajes(String[] ids) {
 		List <LenguajeProgramacion> lenguajes=new ArrayList<LenguajeProgramacion>();
 		for (int i = 0; i < ids.length; i++) {
-			LenguajeProgramacion l= (LenguajeProgramacion) ses.load("lenguajeProgramacion", Long.parseLong(ids[i]));
+			LenguajeProgramacion l= ses.get(LenguajeProgramacion.class, Long.parseLong(ids[i]));
 			lenguajes.add(l);
 		}
 		
