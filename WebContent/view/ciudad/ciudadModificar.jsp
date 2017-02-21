@@ -10,7 +10,7 @@
 	</thead>
 		<c:forEach var="ciudad" items="${ciudad}">
 		<tr>
-		<td>${ciudad.nombre}</td>
+		<td>${ciudad.nombre}</td><td><button >Modificar</button></td>
 		</tr>
 		</c:forEach>
 	
