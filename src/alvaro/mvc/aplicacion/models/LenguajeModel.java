@@ -59,6 +59,21 @@ public class LenguajeModel extends org.mvc.Model{
 		
 		return lenguajes;
 	}
+	public LenguajeProgramacion recuperarPorId(Long id){
+		return ses.get(LenguajeProgramacion.class, id);
+	}
+	
+	public void modificar(String nombre, Long id) {
+		Transaction t = ses.beginTransaction();
+		LenguajeProgramacion l = ses.get(LenguajeProgramacion.class, id);
+		l.setNombre(nombre);
+		ses.merge(l);
+		t.commit();
+		ses.close();
+
+	}
+	
+	
 
 
 }

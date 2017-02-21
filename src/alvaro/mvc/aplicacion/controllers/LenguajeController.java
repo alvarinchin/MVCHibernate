@@ -7,7 +7,9 @@ import javax.servlet.annotation.WebServlet;
 
 import org.mvc.Controller;
 
+import alvaro.mvc.aplicacion.models.CiudadModel;
 import alvaro.mvc.aplicacion.models.LenguajeModel;
+import alvaro.mvc.aplicacion.pojos.Ciudad;
 import alvaro.mvc.aplicacion.pojos.LenguajeProgramacion;
 
 @WebServlet({ "/lenguaje", "/lenguaje/*" })
@@ -66,6 +68,36 @@ public class LenguajeController extends Controller{
 		}
 
 	}
+	public void modificarGet(){
+		if (request.getParameter("id")==null){
+			try {
+				response.sendRedirect(baseURL+"lenguaje/listar");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				view("error/error.jsp");
+			}
+		}else{
+			
+			Long id=  Long.parseLong((String) request.getParameter("id"));
+			LenguajeProgramacion lenguaje= new LenguajeModel().recuperarPorId(id);
+			datos.put("lenguaje", lenguaje);
+			view("lenguaje/lenguajeModificar.jsp");
+			
+		}
+	}
+	
+	public void modificarPost(){
+		String nombre= request.getParameter("nombre");
+		Long id= Long.parseLong(request.getParameter("id"));
+		try{
+		new LenguajeModel().modificar(nombre,id);
+		response.sendRedirect(baseURL+"lenguaje/listar");
+		}catch(Exception e){
+			view("error/error.jsp");
+		}
+		}
+
 
 
 }

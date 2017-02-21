@@ -74,8 +74,8 @@ public class CiudadController extends org.mvc.Controller {
 			}
 		}else{
 			
-			String id= (String) request.getAttribute("id");
-			Ciudad ciudad= new CiudadModel().recuperarPorId(Long.parseLong(id));
+			Long id=  Long.parseLong((String) request.getParameter("id"));
+			Ciudad ciudad= new CiudadModel().recuperarPorId(id);
 			datos.put("ciudad", ciudad);
 			view("ciudad/ciudadModificar.jsp");
 			
@@ -87,7 +87,7 @@ public class CiudadController extends org.mvc.Controller {
 		Long id= Long.parseLong(request.getParameter("id"));
 		try{
 		new CiudadModel().modificar(nombre,id);
-		view("ciudad/listar");
+		response.sendRedirect(baseURL+"ciudad/listar");
 		}catch(Exception e){
 			view("error/error.jsp");
 		}

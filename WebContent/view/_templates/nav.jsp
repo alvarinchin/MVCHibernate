@@ -2,12 +2,11 @@
 <nav class="navbar navbar-inverse">
 	<div class="container-fluid">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="#">WebSiteName</a>
+			<a class="navbar-brand" href="${baseURL}">WebSiteName</a>
 		</div>
 
 		<ul class="nav navbar-nav">
 			<!-- lista de elementos del menu -->
-			<li class="active"><a href="#">Home</a></li>
 			<!-- Elemento1: ciudades -->
 			<li class="dropdown"><a class="dropdown-toggle"
 				data-toggle="dropdown" href="#">Ciudades <span class="caret"></span></a>
