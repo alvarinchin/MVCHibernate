@@ -16,6 +16,8 @@ public class Empleado {
 	private Long id;
 
 	private String nombre;
+	private String username;
+	private String password;
 
 	private Ciudad ciudad;
 
@@ -25,13 +27,17 @@ public class Empleado {
 
 	}
 
-	public Empleado(String nombre, Ciudad ciudad, Collection<LenguajeProgramacion> lenguajes) {
-
+	public Empleado(String nombre, String username, String password, Ciudad ciudad,
+			Collection<LenguajeProgramacion> lenguajes) {
+		super();
 		this.nombre = nombre;
+		this.username = username;
+		this.password = password;
 		this.ciudad = ciudad;
 		this.lenguajes = lenguajes;
-
 	}
+
+
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	public Collection<LenguajeProgramacion> getLenguajes() {
@@ -52,7 +58,6 @@ public class Empleado {
 		this.id = id;
 	}
 
-	@Column(unique = true)
 	public String getNombre() {
 		return nombre;
 	}
@@ -68,6 +73,23 @@ public class Empleado {
 
 	public void setCiudad(Ciudad ciudad) {
 		this.ciudad = ciudad;
+	}
+
+	@Column(unique = true)
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 }

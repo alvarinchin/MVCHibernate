@@ -33,11 +33,13 @@ public class EmpleadoController extends Controller {
 
 	public void crearPost() throws IOException {
 		String nombre = request.getParameter("nombre");
+		String userName = request.getParameter("userName");
+		String pwd = request.getParameter("password");
 		Ciudad c = new CiudadModel().recuperarPorId(Long.parseLong(request.getParameter("ciudad")));
 		String [] ids= request.getParameterValues("lenguajes[]");
 		List<LenguajeProgramacion> lenguajes= new LenguajeModel().listaLenguajes(ids);
 		try {
-			new EmpleadoModel().crearEmpleado(nombre, c,lenguajes);
+			new EmpleadoModel().crearEmpleado(nombre, userName, pwd, c,lenguajes);
 
 			response.sendRedirect(baseURL+"empleado/listar");
 		} catch (Exception e) {
@@ -61,6 +63,18 @@ public class EmpleadoController extends Controller {
 
 	public void listarPost() {
 		listarGet();
+	}
+	
+	public void loginPost(){
+		String username= request.getParameter("usu");
+		String password= request.getParameter("pwd");
+		try{
+		new EmpleadoModel().login(username,password);
+		//session
+		response.sendRedirect(baseURL);
+		}catch ( Exception e){
+			view("error/error.jsp");
+		}
 	}
 
 }

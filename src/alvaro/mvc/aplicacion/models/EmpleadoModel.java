@@ -14,9 +14,9 @@ import alvaro.mvc.aplicacion.pojos.LenguajeProgramacion;
 
 public class EmpleadoModel extends Model{
 	
-	public void crearEmpleado(String nombre,Ciudad ciudad,Collection<LenguajeProgramacion> lenguajes){
+	public void crearEmpleado(String nombre,String userName,String pwd,Ciudad ciudad,Collection<LenguajeProgramacion> lenguajes){
 		Transaction t=ses.beginTransaction();
-		Empleado e = new Empleado(nombre,ciudad,lenguajes);
+		Empleado e = new Empleado(nombre,userName, pwd, ciudad,lenguajes);
 		ciudad.addEmpleado(e);
 		
 		ses.merge(e.getCiudad());
@@ -42,6 +42,12 @@ public class EmpleadoModel extends Model{
 		ses.close();
 		return empleados;
 
+	}
+
+	public void login(String username, String password) {
+		
+		ses.createQuery("from Empleado where username = :username and password = :password").setParameter("username", username).setParameter("password", password);
+		
 	}
 
 }
