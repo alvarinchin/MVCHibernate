@@ -43,6 +43,9 @@ public class EmpleadoModel extends Model{
 		return empleados;
 
 	}
+	public Empleado recuperarPorId(Long id){
+		return ses.get(Empleado.class, id);
+	}
 
 	public List<Empleado> login(String username, String password) {
 		

@@ -24,7 +24,7 @@ public class EmpleadoController extends Controller {
 	}
 
 	public void crearGet() {
-		
+
 		List<Ciudad> lc = new CiudadModel().listar();
 		List<LenguajeProgramacion> lp = new LenguajeModel().listar();
 
@@ -38,19 +38,19 @@ public class EmpleadoController extends Controller {
 		String userName = request.getParameter("userName");
 		String pwd = request.getParameter("password");
 		Ciudad c = new CiudadModel().recuperarPorId(Long.parseLong(request.getParameter("ciudad")));
-		String [] ids= request.getParameterValues("lenguajes[]");
-		List<LenguajeProgramacion> lenguajes= new LenguajeModel().listaLenguajes(ids);
+		String[] ids = request.getParameterValues("lenguajes[]");
+		List<LenguajeProgramacion> lenguajes = new LenguajeModel().listaLenguajes(ids);
 		try {
-			new EmpleadoModel().crearEmpleado(nombre, userName, pwd, c,lenguajes);
+			new EmpleadoModel().crearEmpleado(nombre, userName, pwd, c, lenguajes);
 
-			response.sendRedirect(baseURL+"empleado/listar");
+			response.sendRedirect(baseURL + "empleado/listar");
 		} catch (Exception e) {
 			view("error/error.jsp");
 		}
 	}
 
 	public void listarGet() {
-		
+
 		if (request.getParameter("filtro") == null) {
 			List<Empleado> empleados = new EmpleadoModel().listar();
 
@@ -67,32 +67,66 @@ public class EmpleadoController extends Controller {
 	public void listarPost() {
 		listarGet();
 	}
-	
-	public void loginPost(){
-		String username= request.getParameter("usu");
-		String password= request.getParameter("pwd");
-		try{
-		Empleado e= new EmpleadoModel().login(username,password).get(0);
-		//session
-		HttpSession ss = request.getSession(true);
-		ss.setAttribute("userName", e.getUsername());
-		ss.setAttribute("nombre", e.getNombre());
-		ss.setAttribute("id", e.getId());
-		response.sendRedirect(baseURL);
-		}catch ( Exception e){
+
+	public void loginPost() {
+		String username = request.getParameter("usu");
+		String password = request.getParameter("pwd");
+		try {
+			Empleado e = new EmpleadoModel().login(username, password).get(0);
+			// session
+			HttpSession ss = request.getSession(true);
+			ss.setAttribute("userName", e.getUsername());
+			ss.setAttribute("nombre", e.getNombre());
+			ss.setAttribute("id", e.getId());
+			response.sendRedirect(baseURL);
+		} catch (Exception e) {
 			view("error/error.jsp");
 		}
-		//sesion();
+		// sesion();
 	}
-	
-	public void sesion(){
+
+	public void sesion() {
 		HttpSession ss = request.getSession(true);
-		String ssUsername = (String)ss.getAttribute("userName");
-		String ssNombre = (String)ss.getAttribute("nombre");
-		String ssId=(String)String.valueOf(ss.getAttribute("id"));
-		datos.put("userName",ssUsername);
-		datos.put("sesNombre",ssNombre);
-		datos.put("id",ssId);
+		String ssUsername = (String) ss.getAttribute("userName");
+		String ssNombre = (String) ss.getAttribute("nombre");
+		String ssId = (String) String.valueOf(ss.getAttribute("id"));
+		datos.put("userName", ssUsername);
+		datos.put("sesNombre", ssNombre);
+		datos.put("id", ssId);
+	}
+
+	public void modificarGet() {
+		if (request.getParameter("id") == null) {
+			try {
+				response.sendRedirect(baseURL + "empleado/listar");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				view("error/error.jsp");
+			}
+		} else {
+
+			Long id = Long.parseLong((String) request.getParameter("id"));
+			Empleado empleado = new EmpleadoModel().recuperarPorId(id);
+			List<LenguajeProgramacion> lc = new LenguajeModel().listar();
+			List<Ciudad> c = new CiudadModel().listar();
+			datos.put("ciudades", c);
+			datos.put("lenguajes", lc);
+			datos.put("empleado", empleado);
+			view("empleado/empleadoModificar.jsp");
+
+		}
+	}
+
+	public void modificarPost() {
+		String nombre = request.getParameter("nombre");
+		Long id = Long.parseLong(request.getParameter("id"));
+		try {
+			new CiudadModel().modificar(nombre, id);
+			response.sendRedirect(baseURL + "ciudad/listar");
+		} catch (Exception e) {
+			view("error/error.jsp");
+		}
 	}
 
 }

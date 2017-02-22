@@ -8,13 +8,17 @@
 	
 	</thead>
 		<c:forEach var="empleado" items="${empleados}">
+		<form action="${baseURL}empleado/modificar">
 		<tr>
 		<td>${empleado.nombre}</td><td>${empleado.ciudad.nombre}</td><td>${empleado.username}</td>
 		<td>
 		<c:forEach var="lenguaje" items="${empleado.lenguajes}">${lenguaje.nombre} </c:forEach>
 		</td>
+		<td><input type="hidden" name="id" value="${empleado.id}"><button class="btn btn-primary" type="submit">Modificar</button></td>
+		
 		
 		</tr>
+		</form>
 		</c:forEach>
 	
 	</table>

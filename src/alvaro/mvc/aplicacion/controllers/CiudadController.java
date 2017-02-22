@@ -8,8 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import alvaro.mvc.aplicacion.models.CiudadModel;
 import alvaro.mvc.aplicacion.pojos.Ciudad;
 
-
-
 @SuppressWarnings("serial")
 @WebServlet({ "/ciudad", "/ciudad/*" })
 public class CiudadController extends org.mvc.Controller {
@@ -27,8 +25,7 @@ public class CiudadController extends org.mvc.Controller {
 		try {
 			new CiudadModel().crearCiudad(nombre);
 			response.sendRedirect(baseURL + "ciudad/listar");
-		}
-		catch (Exception e){
+		} catch (Exception e) {
 			view("error/error.jsp");
 		}
 	}
@@ -36,12 +33,11 @@ public class CiudadController extends org.mvc.Controller {
 	public void listarGet() {
 		if (request.getParameter("filtro") == null) {
 			List<Ciudad> lc = new CiudadModel().listar();
-			
+
 			datos.put("ciudades", lc);
 			view("ciudad/ciudadListar.jsp");
 		} else {
-			List<Ciudad> lc = new CiudadModel().listarFiltro(request
-					.getParameter("filtro"));
+			List<Ciudad> lc = new CiudadModel().listarFiltro(request.getParameter("filtro"));
 			datos.put("ciudades", lc);
 			view("ciudad/ciudadListar.jsp");
 		}
@@ -54,43 +50,42 @@ public class CiudadController extends org.mvc.Controller {
 			datos.put("ciudades", lc);
 			view("ciudad/ciudadListar.jsp");
 		} else {
-			List<Ciudad> lc = new CiudadModel().listarFiltro(request
-					.getParameter("filtro"));
+			List<Ciudad> lc = new CiudadModel().listarFiltro(request.getParameter("filtro"));
 			datos.put("ciudades", lc);
 			view("ciudad/ciudadListar.jsp");
 
 		}
 
 	}
-	
-	public void modificarGet(){
-		if (request.getParameter("id")==null){
+
+	public void modificarGet() {
+		if (request.getParameter("id") == null) {
 			try {
-				response.sendRedirect(baseURL+"ciudad/listar");
+				response.sendRedirect(baseURL + "ciudad/listar");
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				view("error/error.jsp");
 			}
-		}else{
-			
-			Long id=  Long.parseLong((String) request.getParameter("id"));
-			Ciudad ciudad= new CiudadModel().recuperarPorId(id);
+		} else {
+
+			Long id = Long.parseLong((String) request.getParameter("id"));
+			Ciudad ciudad = new CiudadModel().recuperarPorId(id);
 			datos.put("ciudad", ciudad);
 			view("ciudad/ciudadModificar.jsp");
-			
+
 		}
 	}
-	
-	public void modificarPost(){
-		String nombre= request.getParameter("nombre");
-		Long id= Long.parseLong(request.getParameter("id"));
-		try{
-		new CiudadModel().modificar(nombre,id);
-		response.sendRedirect(baseURL+"ciudad/listar");
-		}catch(Exception e){
+
+	public void modificarPost() {
+		String nombre = request.getParameter("nombre");
+		Long id = Long.parseLong(request.getParameter("id"));
+		try {
+			new CiudadModel().modificar(nombre, id);
+			response.sendRedirect(baseURL + "ciudad/listar");
+		} catch (Exception e) {
 			view("error/error.jsp");
 		}
-		}
+	}
 
 }
