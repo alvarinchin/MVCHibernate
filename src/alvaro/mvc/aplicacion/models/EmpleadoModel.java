@@ -44,9 +44,9 @@ public class EmpleadoModel extends Model{
 
 	}
 
-	public void login(String username, String password) {
+	public List<Empleado> login(String username, String password) {
 		
-		ses.createQuery("from Empleado where username = :username and password = :password").setParameter("username", username).setParameter("password", password);
+		return ses.createQuery("from Empleado where username = :username and password = :password").setParameter("username", username).setParameter("password", password).list();
 		
 	}
 

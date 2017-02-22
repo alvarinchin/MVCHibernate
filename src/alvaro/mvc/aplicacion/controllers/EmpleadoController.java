@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpSession;
 
 import org.mvc.Controller;
 
@@ -23,6 +24,7 @@ public class EmpleadoController extends Controller {
 	}
 
 	public void crearGet() {
+		
 		List<Ciudad> lc = new CiudadModel().listar();
 		List<LenguajeProgramacion> lp = new LenguajeModel().listar();
 
@@ -48,6 +50,7 @@ public class EmpleadoController extends Controller {
 	}
 
 	public void listarGet() {
+		
 		if (request.getParameter("filtro") == null) {
 			List<Empleado> empleados = new EmpleadoModel().listar();
 
@@ -69,12 +72,27 @@ public class EmpleadoController extends Controller {
 		String username= request.getParameter("usu");
 		String password= request.getParameter("pwd");
 		try{
-		new EmpleadoModel().login(username,password);
+		Empleado e= new EmpleadoModel().login(username,password).get(0);
 		//session
+		HttpSession ss = request.getSession(true);
+		ss.setAttribute("userName", e.getUsername());
+		ss.setAttribute("nombre", e.getNombre());
+		ss.setAttribute("id", e.getId());
 		response.sendRedirect(baseURL);
 		}catch ( Exception e){
 			view("error/error.jsp");
 		}
+		//sesion();
+	}
+	
+	public void sesion(){
+		HttpSession ss = request.getSession(true);
+		String ssUsername = (String)ss.getAttribute("userName");
+		String ssNombre = (String)ss.getAttribute("nombre");
+		String ssId=(String)String.valueOf(ss.getAttribute("id"));
+		datos.put("userName",ssUsername);
+		datos.put("sesNombre",ssNombre);
+		datos.put("id",ssId);
 	}
 
 }
