@@ -71,7 +71,7 @@
 						</ul></li>
 				</c:when>
 				<c:otherwise>
-					<li class=""><a  href="#">Bienvenido ${userName}</a>
+					<li class=""><a  href="#">Bienvenido ${nombre}</a>
 						</li>
 				</c:otherwise>
 			</c:choose>

@@ -37,20 +37,26 @@
 			</div>
 			<div class="form-group">
 				<label>Lenguajes de programación</label>
-				<c:forEach var="lenguaje" items="${lenguajes}">
-					<c:forEach var="lenguajeSelec" items="${empleado.lenguajes}">
-						<c:choose>
-							<c:when test="${lenguaje.nombre == lenguajeSelect.nombre}">
-								<input name="lenguajes[]" type="checkbox" checked="checked"
-									value="${lenguaje.id}">${lenguaje.nombre}>
-							</c:when>
-							<c:otherwise>
-								<input name="lenguajes[]" type="checkbox" value="${lenguaje.id}">${lenguaje.nombre}
-							</c:otherwise>
-						</c:choose>
+				
+					<c:forEach var="lenguaje" items="${lenguajes}">
+						
+						<% boolean seleccionado=false; %>
+						<c:forEach var="lenguajeSelec" items="${empleado.lenguajes}">
+						<c:if test="${lenguaje.nombre == lenguajeSelec.nombre }">
+						<%seleccionado = true; %>
+						</c:if>
+						</c:forEach>
 						<div class="checkbox-inline">
+						
+						<input name="lenguajes[]" type="checkbox"
+								<c:if test="<%=seleccionado%>">
+									 checked="checked"	
+								</c:if>
+								value="${lenguaje.id}">${lenguaje.nombre}
+								
+							</div>
 					</c:forEach>
-				</c:forEach>
+				
 			</div>
 
 			<div class="form-group">
