@@ -71,8 +71,13 @@
 						</ul></li>
 				</c:when>
 				<c:otherwise>
-					<li class=""><a  href="#">Bienvenido ${nombre}</a>
-						</li>
+					<li class=""><a class="dropdown-toggle" data-toggle="dropdown"
+						href="#">Bienvenido ${nombre} <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<!-- Paginas dentro del menú -->
+							<li><a href="${baseURL}empleado/logout">Logout</a></li>
+						</ul></li>
+					</li>
 				</c:otherwise>
 			</c:choose>
 			<!-- Elemento1: Login -->

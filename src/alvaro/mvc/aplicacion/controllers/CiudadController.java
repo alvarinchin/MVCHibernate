@@ -77,12 +77,22 @@ public class CiudadController extends org.mvc.Controller {
 		}
 	}
 
-	public void modificarPost() {
-		String nombre = request.getParameter("nombre");
+	public void borrarGet() {
+		view("ciudad/ciudadBorrar.jsp");
+
+	}
+
+	public void listarAjaxGet() {
+		List<Ciudad> lc = new CiudadModel().listar();
+		datos.put("ciudades", lc);
+		view("ciudad/listarAjax.jsp",false);
+
+	}
+
+	public void borrarPost() {
 		Long id = Long.parseLong(request.getParameter("id"));
 		try {
-			new CiudadModel().modificar(nombre, id);
-			response.sendRedirect(baseURL + "ciudad/listar");
+			new CiudadModel().borrar(id);
 		} catch (Exception e) {
 			view("error/error.jsp");
 		}

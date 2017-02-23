@@ -64,6 +64,16 @@ public class CiudadModel extends org.mvc.Model {
 		ses.close();
 
 	}
+
+	public void borrar(Long id) {
+		
+		Transaction t= ses.beginTransaction();
+		Ciudad c=ses.get(Ciudad.class, id);
+		ses.delete(c);
+		t.commit();
+		ses.close();
+		
+	}
 	
 
 }

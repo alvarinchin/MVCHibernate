@@ -33,11 +33,13 @@
 				<c:forEach var="lenguaje" items="${lenguajes}">
 					<div class="checkbox-inline">
 						<input name="lenguajes[]" type="checkbox" value="${lenguaje.id}">${lenguaje.nombre}
+				</div>
 				</c:forEach>
 			</div>
 		
 			<div class="form-group">
 				<button class="btn btn-primary" type="submit">Enviar</button>
+				</div>
 		</form>
 	</div>
 </div>

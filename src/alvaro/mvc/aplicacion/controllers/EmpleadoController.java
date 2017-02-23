@@ -20,6 +20,7 @@ import alvaro.mvc.aplicacion.pojos.LenguajeProgramacion;
 public class EmpleadoController extends Controller {
 
 	public void indexGet() {
+		
 		view("empleado/index.jsp");
 	}
 
@@ -67,6 +68,17 @@ public class EmpleadoController extends Controller {
 	public void listarPost() {
 		listarGet();
 	}
+	public void logoutGet(){
+		HttpSession ss = request.getSession(true);
+		ss.removeAttribute("userName");
+		ss.removeAttribute("nombre");
+		ss.removeAttribute("id");
+		try {
+			response.sendRedirect(baseURL);
+		} catch (IOException e) {
+			view("error/error.jsp");
+		}
+	}
 
 	public void loginPost() {
 		String username = request.getParameter("usu");
@@ -80,6 +92,7 @@ public class EmpleadoController extends Controller {
 			ss.setAttribute("id", e.getId());
 			response.sendRedirect(baseURL);
 		} catch (Exception e) {
+		
 			view("error/error.jsp");
 		}
 		// sesion();
@@ -120,10 +133,14 @@ public class EmpleadoController extends Controller {
 
 	public void modificarPost() {
 		String nombre = request.getParameter("nombre");
+		String pwd = request.getParameter("password");
+		Ciudad c = new CiudadModel().recuperarPorId(Long.parseLong(request.getParameter("ciudad")));
+		String[] ids = request.getParameterValues("lenguajes[]");
 		Long id = Long.parseLong(request.getParameter("id"));
+		List<LenguajeProgramacion> lenguajes = new LenguajeModel().listaLenguajes(ids);
 		try {
-			new CiudadModel().modificar(nombre, id);
-			response.sendRedirect(baseURL + "ciudad/listar");
+			new EmpleadoModel().modificar(nombre, pwd, c, lenguajes, id);
+			response.sendRedirect(baseURL + "empleado/listar");
 		} catch (Exception e) {
 			view("error/error.jsp");
 		}

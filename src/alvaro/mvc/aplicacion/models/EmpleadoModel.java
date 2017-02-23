@@ -53,4 +53,19 @@ public class EmpleadoModel extends Model{
 		
 	}
 
+	public void modificar(String nombre, String pwd, Ciudad c, List<LenguajeProgramacion> lenguajes,Long id) {
+		
+		Transaction t = ses.beginTransaction();
+		Empleado e= ses.get(Empleado.class, id);
+		e.setCiudad(c);
+		e.setLenguajes(lenguajes);
+		e.setNombre(nombre);
+		e.setPassword(pwd);
+		ses.merge(e);
+		t.commit();
+		ses.close();
+		
+		
+	}
+
 }
